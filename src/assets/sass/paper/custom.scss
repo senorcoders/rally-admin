@@ -1,0 +1,20 @@
+.card form [class*="col-"]:first-child {
+    padding-left: 5px !important;
+}
+.card form [class*="col-"]:last-child {
+    padding-right: 5px;
+}
+.mx-datepicker {
+    width: 100% !important;
+}
+btn{
+	background-color: #fff;
+	border-style: solid 0px #fff;
+}
+.sidebar .logo .simple-text .logo-img{
+    height: 0px;
+    img{
+    	max-width: 40px;
+    	width: 40px;
+    }
+ }
