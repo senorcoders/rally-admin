@@ -26,7 +26,7 @@
 					                      v-model="goal.title">
 					            	</fg-input>
 					          	</div>
-					          	<div class="col-md-4">
+					          	<div class="col-md-3">
 						            <div class="form-group">
 						              <label>Goal Type</label>
 						              <v-select v-model="goal.goal_type" :options="[{label: 'Call', value: 'call'},{label: 'Donate', value: 'donate'},{label: 'Email', value: 'email'},{label: 'Fax', value: 'fax'}]" label="label">							    
@@ -34,9 +34,9 @@
 						            </div>
 						          </div>
 
-						          <div class="col-md-4">
+						          <div class="col-md-5">
 						            <div class="form-group">
-						            	<label>Contact Option</label>
+						            	<label>Contact Option </label>
 						              <v-select id="contact" v-model="goal.contact_option_id" v-on:click="greet" :options="contact_options" label="title">
 												    <template slot="option" slot-scope="option">												        
 												        {{ option.title }}
@@ -53,8 +53,9 @@
 					                      v-model="goal.source_link">
 					            	</fg-input>
 					          	</div>
-					          	<div class="col-md-6">
-						            <div class="form-group reps" style="display:none">
+					          	<div class="col-md-6" v-if="goal.contact_option_id.id === '40c652e4-bf45-4680-8223-b0b0cf8a92ba'">
+
+						            <div class="form-group reps" >
 						             	<label>Reps</label>
 						              <v-select v-model="goal.representative_id" :options="reps" label="name">
 												    <template slot="option" slot-scope="option">
