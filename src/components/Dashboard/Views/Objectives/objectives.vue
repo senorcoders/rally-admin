@@ -11,7 +11,7 @@
         </div>
       </div>
       <div>
-        <CreateGoal v-bind:goals_data="goals_data"></CreateGoal>
+        <CreateGoal v-bind:table1="table1" v-bind:goals_data="goals_data" v-bind:objective_id="objective_id"></CreateGoal>
       </div>
 
     </div>
@@ -76,6 +76,7 @@
           </div>
         </div>     
     </div>
+   </form>
   </div>
 </template>
 <script>
@@ -112,7 +113,8 @@
           data: [...tableData]
         },
         goals_data:[],
-        organizations:[]
+        organizations:[],
+        objective_id:''
       }
     },
     methods: {
@@ -123,7 +125,7 @@
       var Client = require('node-rest-client').Client;
       var client = new Client();
       var $that = this;  
-      
+      this.objective_id = id;
       // registering remote methods 
       client.registerMethod("jsonMethod", "http://api.provethisconcept.com/api/goals?objective_id="+id, "GET");
        
