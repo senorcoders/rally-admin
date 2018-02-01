@@ -163,7 +163,7 @@
 					goal_type: this.goal.goal_type.value,
 					//representative_id: this.goal.representative_id.id,
 					contact_option_id: this.goal.contact_option_id.id,
-					objective_id: this.goal.objective_id
+					objective_id: this.objective_id
       	}
         	
         var args = {
