@@ -112,7 +112,6 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
           image_url: image,
           action_link:''
       	}        
-        //alert(this.$refs.my_upload);
 
         var args = {
 				    data: post_data,
@@ -123,33 +122,15 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
-                alert( JSON.stringify(args) ); 
 
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives', 'POST')
         client.methods.jsonMethod(args, function (dataObjective, response) {
           // parsed response body as js object        
-          setTimeout(function () {            
-            $that.get_objectives()
-            //$that.$parent.$options.methods.get_objectives()
-            //alert('listo');
+          setTimeout(function () {       
+            $that.$emit('get_objectives')
           }, 10)
         })
 
-      },
-      get_objectives: function () {
-        var Client = require('node-rest-client').Client
-        var client = new Client()
-        var $that = this
-        // registering remote methods
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives', 'GET')
-        client.methods.jsonMethod(function (dataR, response) {
-          // parsed response body as js object
-          setTimeout(function () {
-            table1.data = dataR
-            $that.objective.data = dataR
-            alert('updating table');
-          }, 10)
-        })
       },
       get_organizations: function () {
         var Client = require('node-rest-client').Client

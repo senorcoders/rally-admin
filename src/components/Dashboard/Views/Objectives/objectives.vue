@@ -6,12 +6,12 @@
       <div class="modal fade create-objective-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <CreateObjective></CreateObjective>    
+            <CreateObjective v-on:get_objectives="get_objectives"></CreateObjective>    
           </div>
         </div>
       </div>
       <div>
-        <CreateGoal v-bind:table1="table1" v-bind:goals_data="goals_data" v-bind:objective_id="objective_id"></CreateGoal>
+        <CreateGoal  v-bind:goals_data="goals_data" v-bind:objective_id="objective_id"></CreateGoal>
       </div>
 
     </div>
