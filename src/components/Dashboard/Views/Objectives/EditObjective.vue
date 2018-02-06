@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="header">
-      <h4 class="title">Create Objective</h4>
+      <h4 class="title">Update Objective {{objective_id.title}} </h4>
     </div>
     <div class="content">
       <form>
@@ -9,32 +9,32 @@
           <div class="col-md-6">
           	<div class="col-md-12">
 							<fg-input type="text"
-                      label="Title"
+                      label="Title"                      
                       placeholder="Title"
-                      v-model="objective.title">
+                      v-model="objective_id.title">
             	</fg-input>
           	</div>
           	<div class="col-md-12">
-	            <div class="form-group">
-	              <label>Organizations</label>
-	              <v-select v-model="objective.organizations" :options="organizations" label="name">
-							    <template slot="option" slot-scope="option">
-							        <img style="width=20px" class="fa" :src="option.image_url"></img>
-							        {{ option.name }}
-							    </template>
-							  </v-select>
-	            </div>
-	          </div>
+              <div class="form-group">
+                <label>Organizations</label>
+                <v-select v-model="objective.organizations" :options="organizations" label="name">
+                  <template slot="option" slot-scope="option">
+                      <img style="width=20px" class="fa" :src="option.image_url"></img>
+                      {{ option.name }}
+                  </template>
+                </v-select>
+              </div>
+            </div>
 						<div class="col-md-12">
 	            <div class="form-group">
 	              <label>Release Date</label><br>
-	              <date-picker v-model="objective.release_date" format="yyyy-MM-dd" lang="en" :first-day-of-week="0"></date-picker>
+	              <date-picker v-model="objective_id.release_date" format="yyyy-MM-dd" lang="en" ></date-picker>
 	            </div>
 	          </div>
             <div class="col-md-12">
               <label class="image-tag">Image {{objective.image_url}}</label>
               
-              <fileupload ref="my_upload" v-model="objective.image_url" target="http://138.68.19.227:3000/" action="POST"> </fileupload>
+              <fileupload ref="my_upload" v-model="objective_id.image_url" target="http://138.68.19.227:3000/" action="POST"> </fileupload>
             <!--<CustomImageUpload></CustomImageUpload>-->
             </div>
           </div>
@@ -45,7 +45,7 @@
 	              <label>Short Description</label>
 	              <textarea rows="4" class="form-control border-input"
 	                        placeholder="Here can be your short description"
-	                        v-model="objective.short_desc">
+	                        v-model="objective_id.short_desc">
 
 	              </textarea>
 	            </div>
@@ -55,7 +55,7 @@
 	              <label>Description</label>
 	              <textarea rows="4" class="form-control border-input"
 	                        placeholder="Here can be your description"
-	                        v-model="objective.description">
+	                        v-model="objective_id.description">
 
 	              </textarea>
 	            </div>
@@ -83,8 +83,8 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
 //import uploader from 'vuejs-uploader'
   export default {
   	components: { DatePicker, 'fileupload': FileUpload, CustomImageUpload },
-  	name: 'CreateObjective',
-    props: ["table1"],
+  	name: 'EditObjective',
+    props: ["objective_id"],
     data () {
       return {
         objective: {
@@ -103,16 +103,15 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
       saveObjective () {
         let image = $( "input[name='fileUpload']" ).val().replace(/C:\\fakepath\\/i, '');
       	let post_data= {
-      		title: this.objective.title,
-					short_desc: this.objective.short_desc,
-					description: this.objective.description,
-					release_date: this.objective.release_date,
-					organization_id: this.objective.organizations.id,
+      		title: '',
+					short_desc: '',
+					description: '',
+					release_date: '',
+					organization_id: '',
           source_link: '',
-          image_url: image,
+          image_url: '',
           action_link:''
       	}        
-        //alert(this.$refs.my_upload);
 
         var args = {
 				    data: post_data,
@@ -123,16 +122,12 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
-                alert( JSON.stringify(args) ); 
 
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives', 'POST')
         client.methods.jsonMethod(args, function (dataObjective, response) {
           // parsed response body as js object        
-          setTimeout(function () {            
-            //$that.get_objectives()
+          setTimeout(function () {       
             $that.$emit('get_objectives')
-            //$that.$parent.$options.methods.get_objectives()
-            //alert('listo');
           }, 10)
         })
 
@@ -146,18 +141,39 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         client.methods.jsonMethod(function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
+            alert(JSON.stringify(dataOrganizations));
             $that.organizations = dataOrganizations
           }, 100)
         })
-      }
-    },
-    created () {
-      this.get_organizations()
+      },
+    get_one_objective: function(){
+      var Client = require('node-rest-client').Client
+        var client = new Client()
+        var $that = this
+        // registering remote methods
+        alert($that.objective_id);
+        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/api/objectives/'+$that.objective_id, 'GET')
+        client.methods.jsonMethod(function (dataOrganizations, response) {
+          // parsed response body as js object
+          setTimeout(function () {
+            //$that.organizations = dataOrganizations
+            alert( JSON.stringify(dataOrganizations) );
+          }, 100)
+        })
+      
+    }
+    
+  },
+  created () {
+      alert("edit");
+      this.get_organizations();
     },
     beforeMount () {
+      //alert('mount');
       //this.get_organizations()
+      //get_one_objective();
     }
-  }
+}
 
 </script>
 <style>

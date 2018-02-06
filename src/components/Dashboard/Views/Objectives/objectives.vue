@@ -7,6 +7,14 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <CreateObjective v-on:get_objectives="get_objectives"></CreateObjective>    
+            
+          </div>
+        </div>
+      </div>
+      <div id="edit-objective-modal-lg" class="modal fade edit-objective-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <EditObjective v-bind:objective_id="objective_id" v-on:get_objectives="get_objectives"></EditObjective>
           </div>
         </div>
       </div>
@@ -60,7 +68,7 @@
                         </button>
                       </td>
                       <td>
-                        <button @click="$emit('edit', item.id)">
+                        <button v-on:click="show_update_form(item)">
                           <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
                         </button>
                       </td>
@@ -82,6 +90,7 @@
 <script>
   import PaperTable from 'components/UIComponents/PaperTable.vue'
   import CreateObjective from 'components/Dashboard/Views/Objectives/CreateObjective.vue'
+  import EditObjective from 'components/Dashboard/Views/Objectives/EditObjective.vue'
   import CreateGoal from 'components/Dashboard/Views/Goals/goals.vue'
   const tableColumns = [
     'Id',
@@ -102,6 +111,7 @@
     components: {
       PaperTable,
       CreateObjective,
+      EditObjective,
       CreateGoal
     },
     data () {
@@ -114,7 +124,9 @@
         },
         goals_data:[],
         organizations:[],
-        objective_id:''
+        objective_id:{
+          title: 'objective title'
+        }
       }
     },
     methods: {
@@ -164,7 +176,28 @@
             $that.get_objectives();
           }, 10)
         })
+      },
+      show_update_form: function(id) {                
+        this.objective_id = id;
+        $('#edit-objective-modal-lg').modal('show')
+        /*var Client = require('node-rest-client').Client
+        var client = new Client()
+        var $that = this
+        // registering remote methods
+        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objective/'+$that.objective_id, 'GET')       
+        client.methods.jsonMethod(function (dataObjective, response) {
+          // parsed response body as js object
+          setTimeout(function () {
+            $that.objective_id = dataObjective
+            
+            //alert( JSON.stringify(dataOrganizations) );
+            
+          }, 100)
+        })*/
+      
       }
+        
+      
     },
     created () {
       //this.get_objectives()

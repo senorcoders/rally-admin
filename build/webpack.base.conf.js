@@ -56,6 +56,7 @@ var webpackConfig = {
       },
       {
         test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
       },

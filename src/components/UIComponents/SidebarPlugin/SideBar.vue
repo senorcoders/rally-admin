@@ -11,7 +11,7 @@
             <div class="logo-img">
                 <img src="static/img/rally-logo.png" alt="">
             </div>
-          Rally
+          Rally Admin
         </a>
       </div>
       <slot>
