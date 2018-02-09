@@ -58,9 +58,8 @@
 						            <div class="form-group reps" >
 						             	<label>Reps</label>
 						              <v-select v-model="goal.representative_id" :options="reps" label="name">
-												    <template slot="option" slot-scope="option">
-												        <img style="width=40px" class="fa" :src="option.photo_url"></img>
-												        {{ option.name }}
+												    <template slot="option" slot-scope="option">												        
+												        {{ option.name}}
 												    </template>
 												  </v-select>
 						            </div>
@@ -233,7 +232,8 @@
         var client = new Client()
         var $that = this
         // registering remote methods
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/reps', 'GET')
+        //client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/reps', 'GET')
+        client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/rallyapi/backend/reps', 'GET')        
         client.methods.jsonMethod(function (dataReps, response) {
           // parsed response body as js object
           setTimeout(function () {

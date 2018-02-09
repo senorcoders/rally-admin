@@ -17,7 +17,7 @@
           	<div class="col-md-12">
               <div class="form-group">
                 <label>Organizations</label>
-                <v-select v-model="objective.organizations" :options="organizations" label="name">
+                <v-select v-model="objective_id.organization" :options="organizations"  label="name">
                   <template slot="option" slot-scope="option">
                       <img style="width=20px" class="fa" :src="option.image_url"></img>
                       {{ option.name }}
@@ -34,7 +34,7 @@
             <div class="col-md-12">
               <label class="image-tag">Image {{objective.image_url}}</label>
               
-              <fileupload ref="my_upload" v-model="objective_id.image_url" target="http://138.68.19.227:3000/" action="POST"> </fileupload>
+              <fileupload ref="my_upload" v-model="objective_id.image_url" target="http://174.138.51.165:3000/" action="POST"> </fileupload>
             <!--<CustomImageUpload></CustomImageUpload>-->
             </div>
           </div>
@@ -64,8 +64,8 @@
         </div>          
         
         <div class="text-center">
-          <button type="submit" class="btn btn-info btn-fill btn-wd" @click.prevent="saveObjective">
-            Create Objective
+          <button type="submit" class="btn btn-info btn-fill btn-wd" @click.prevent="editObjective">
+            Update Objective
           </button>
         </div>
         <div class="clearfix"></div>
@@ -94,25 +94,39 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
 				release_date: '',
         image_url: '',
 				organization_id: '',
-        organizations:''				  
+        organizations:''
       },
       organizations: []
     }
   },
     methods: {
-      saveObjective () {
-        let image = $( "input[name='fileUpload']" ).val().replace(/C:\\fakepath\\/i, '');
-      	let post_data= {
-      		title: '',
-					short_desc: '',
-					description: '',
-					release_date: '',
-					organization_id: '',
-          source_link: '',
-          image_url: '',
-          action_link:''
-      	}        
-
+      editObjective () {        
+        
+        let image = $( "#edit-objective-modal-lg input[name='fileUpload']" ).val().replace(/C:\\fakepath\\/i, '');
+        let post_data= {}
+        if(image != ""){
+          post_data= {
+            title: this.objective_id.title,
+            short_desc: this.objective_id.short_desc,
+            description: this.objective_id.description,
+            release_date: this.objective_id.release_date,
+            organization_id: this.objective_id.organization.id,
+            image_url: image,
+            source_link: '',          
+            action_link:''
+          }   
+        }else{
+          post_data= {
+            title: this.objective_id.title,
+            short_desc: this.objective_id.short_desc,
+            description: this.objective_id.description,
+            release_date: this.objective_id.release_date,
+            organization_id: this.objective_id.organization.id, //this.objective_id.organization_id,
+            source_link: '',          
+            action_link:''
+          }   
+        }
+        alert(JSON.stringify(image));      
         var args = {
 				    data: post_data,
 				    headers: { "Content-Type": "application/json" }
@@ -122,11 +136,13 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
-
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives', 'POST')
+        alert( JSON.stringify(args));
+        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives/'+$that.objective_id.id, 'PUT')
         client.methods.jsonMethod(args, function (dataObjective, response) {
-          // parsed response body as js object        
-          setTimeout(function () {       
+          alert( JSON.stringify(dataObjective));
+          // parsed response body as js object
+          setTimeout(function () {                   
+            $('#edit-objective-modal-lg').modal('hide')
             $that.$emit('get_objectives')
           }, 10)
         })
@@ -141,7 +157,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         client.methods.jsonMethod(function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
-            //alert(JSON.stringify(dataOrganizations));
+            $that.organizations = dataOrganizations
           }, 100)
         })
       },

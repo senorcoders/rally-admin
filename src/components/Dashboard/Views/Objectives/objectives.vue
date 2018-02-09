@@ -48,7 +48,7 @@
                     <!--<th>Action Link</th>-->
                     <th>Release</th>
                     <th>Goals</th>
-                    <th>Edit Objective</th>
+                    <th>Edit</th>
                     <th>Delete</th>
                   </tr> 
                 </thead>
@@ -68,7 +68,7 @@
                         </button>
                       </td>
                       <td>
-                        <button v-on:click="show_update_form(item)">
+                        <button v-on:click="show_update_form(item, item.organization.id , item.organization.name )">
                           <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
                         </button>
                       </td>
@@ -125,7 +125,8 @@
         goals_data:[],
         organizations:[],
         objective_id:{
-          title: 'objective title'
+          title: 'objective title',
+          organizations: {id:"23", name:"rene"}
         }
       }
     },
@@ -177,8 +178,10 @@
           }, 10)
         })
       },
-      show_update_form: function(id) {                
+      show_update_form: function(id, org_id, org_name) {                
         this.objective_id = id;
+        this.objective_id.organizations={id: "123", name:"milton"}
+        
         $('#edit-objective-modal-lg').modal('show')
         /*var Client = require('node-rest-client').Client
         var client = new Client()
