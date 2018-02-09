@@ -11,25 +11,12 @@
         <a class="navbar-brand">{{routeName}}</a>
       </div>
       <div class="navbar-right-menu">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="open">
-            <a href="#" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
-              <i class="ti-panel"></i>
-              <p>Stats</p>
-            </a>
-          </li>
-             <drop-down title="5 Notifications" icon="ti-bell">
-               <li><a href="#">Notification 1</a></li>
-               <li><a href="#">Notification 2</a></li>
-               <li><a href="#">Notification 3</a></li>
-               <li><a href="#">Notification 4</a></li>
-               <li><a href="#">Another notification</a></li>
-             </drop-down>
+        <ul class="nav navbar-nav navbar-right">                       
           <li>
             <a href="#" class="btn-rotate">
-              <i class="ti-settings"></i>
+              <i class="ti-user"></i>
               <p>
-                Settings
+                Logout
               </p>
             </a>
           </li>
