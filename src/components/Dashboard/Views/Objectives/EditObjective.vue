@@ -141,8 +141,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         client.methods.jsonMethod(function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
-            alert(JSON.stringify(dataOrganizations));
-            $that.organizations = dataOrganizations
+            //alert(JSON.stringify(dataOrganizations));
           }, 100)
         })
       },
@@ -151,21 +150,20 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var client = new Client()
         var $that = this
         // registering remote methods
-        alert($that.objective_id);
+        //alert($that.objective_id);
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/api/objectives/'+$that.objective_id, 'GET')
         client.methods.jsonMethod(function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
             //$that.organizations = dataOrganizations
-            alert( JSON.stringify(dataOrganizations) );
+            //alert( JSON.stringify(dataOrganizations) );
           }, 100)
         })
       
     }
     
   },
-  created () {
-      alert("edit");
+  created () {      
       this.get_organizations();
     },
     beforeMount () {

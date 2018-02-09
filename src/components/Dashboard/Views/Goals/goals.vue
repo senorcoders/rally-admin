@@ -152,7 +152,7 @@
   },
     methods: {
     	greet(){
-    		alert('yes');
+    		//alert('yes');
     	},
       saveGoal () {
       	let post_data= {
@@ -180,25 +180,23 @@
           // parsed response body as js object
 
           setTimeout(function () {            
-            $that.get_goals()
-            //alert(dataOrganizations.contact_option_id);
+            $that.get_goals()            
 						if(dataOrganizations.contact_option_id == '40c652e4-bf45-4680-8223-b0b0cf8a92ba'){
 							var rep_goal = {
 	            	goal_id: dataOrganizations.id,
 	            	representative_id : $that.goal.representative_id.id
 	            }
-	            //alert( JSON.stringify(rep_goal) );
+	            
 			        var argsRepGoal = {
 							    data: rep_goal,
 							    headers: { "Content-Type": "application/json" }
 							};
 							client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives', 'POST')
 	            client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
-	            	alert( JSON.stringify(dataGoalRep) );
+	            	//alert( JSON.stringify(dataGoalRep) );
 	            })
 						}
-            
-            alert( JSON.stringify(dataOrganizations.id) );
+                        
             console.log(dataOrganizations);
           }, 10)
         })

@@ -48,7 +48,7 @@
                     <!--<th>Action Link</th>-->
                     <th>Release</th>
                     <th>Goals</th>
-                    <th>Edit</th>
+                    <th>Edit Objective</th>
                     <th>Delete</th>
                   </tr> 
                 </thead>
