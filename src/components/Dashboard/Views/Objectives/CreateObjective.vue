@@ -123,13 +123,15 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
-                alert( JSON.stringify(args) ); 
+        //alert( JSON.stringify(args) ); 
 
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives', 'POST')
         client.methods.jsonMethod(args, function (dataObjective, response) {
           // parsed response body as js object        
           setTimeout(function () {            
             //$that.get_objectives()
+            $('.create-objective-modal-lg').modal('hide')
+            
             $that.$emit('get_objectives')
             //$that.$parent.$options.methods.get_objectives()
             //alert('listo');
