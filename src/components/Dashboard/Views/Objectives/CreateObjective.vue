@@ -34,7 +34,7 @@
             <div class="col-md-12">
               <label class="image-tag">Image {{objective.image_url}}</label>
               
-              <fileupload ref="my_upload" v-model="objective.image_url" target="http://138.68.19.227:3000/" action="POST"> </fileupload>
+              <fileupload ref="my_upload" v-model="objective.image_url" target="http://174.138.51.165:3000/" action="POST"> </fileupload>
             <!--<CustomImageUpload></CustomImageUpload>-->
             </div>
           </div>
