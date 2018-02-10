@@ -14,8 +14,8 @@ import ObjectivesList from 'src/components/Dashboard/Views/Objectives/objectives
 const routes = [
   {
     path: '/',
-    component: DashboardLayout,
-    redirect: '/admin/overview'
+    component: ObjectivesList,
+    redirect: '/admin/objectives'
   },
   {
     path: '/admin',
