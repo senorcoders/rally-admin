@@ -179,24 +179,9 @@
         })
       },
       show_update_form: function(id, org_id, org_name) {                
-        this.objective_id = id;
-        this.objective_id.organizations={id: "123", name:"milton"}
+        this.objective_id = id;        
         
         $('#edit-objective-modal-lg').modal('show')
-        /*var Client = require('node-rest-client').Client
-        var client = new Client()
-        var $that = this
-        // registering remote methods
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objective/'+$that.objective_id, 'GET')       
-        client.methods.jsonMethod(function (dataObjective, response) {
-          // parsed response body as js object
-          setTimeout(function () {
-            $that.objective_id = dataObjective
-            
-            //alert( JSON.stringify(dataOrganizations) );
-            
-          }, 100)
-        })*/
       
       }
         

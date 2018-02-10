@@ -1,4 +1,6 @@
 <template>
+	<div>
+	<EditGoal  v-bind:goal_id="goal_id" v-on:get_goals="get_goals"></EditGoal>
 	<div id="goalsModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
 
 	  <div class="modal-dialog modal-lg" role="document">
@@ -97,7 +99,7 @@
 						  					<th>Description</th>  					
 						  					<th>Source Link</th> 
 						  					<th>Contact Option</th>
-						  					
+						  					<th>Edit</th>
 						  					<th>Delete</th>
                   </tr> 
                 </thead>
@@ -109,7 +111,12 @@
 													<td>{{ goal.goal_type }}</td> 
 													<td>{{ goal.description.substr(0, 40) }}</td> 
 													<td>{{ goal.source_link }}</td> 
-													<td>{{ goal.contact_option[0] }}</td> 																				
+													<td>{{ goal.contact_option[0] }}</td>
+													<td>
+														<button  v-on:click="show_update_goal_form(goal)">
+		                          <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+		                        </button>   						
+						    					</td>
 													<td>
 														<button  v-on:click="delete_goal(goal.id)">
 		                          <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
@@ -123,12 +130,14 @@
 	    </div>
 	  </div>
 	</div>
-  
+  </div>
 </template>
 <script>
+import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
 
   export default {
   	name: 'CreateGoal',
+  	components: { EditGoal },
   	props: ["goals_data","objective_id"],
     data () {
       return {
@@ -145,6 +154,7 @@
         organizations: [
 				]				
       },
+      goal_id:[],
       reps: [],
       contact_options: []
     }
@@ -173,31 +183,31 @@
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
-        
+         alert(post_data.contact_option_id);
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goals', 'POST')
         client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
-
-          setTimeout(function () {            
-            $that.get_goals()            
-						if(dataOrganizations.contact_option_id == '40c652e4-bf45-4680-8223-b0b0cf8a92ba'){
-							var rep_goal = {
-	            	goal_id: dataOrganizations.id,
-	            	representative_id : $that.goal.representative_id.id
-	            }
-	            
-			        var argsRepGoal = {
-							    data: rep_goal,
-							    headers: { "Content-Type": "application/json" }
-							};
-							client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives', 'POST')
-	            client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
-	            	//alert( JSON.stringify(dataGoalRep) );
-	            })
-						}
-                        
-            console.log(dataOrganizations);
-          }, 10)
+                                
+        
+				if(post_data.contact_option_id == '40c652e4-bf45-4680-8223-b0b0cf8a92ba'){
+					var rep_goal = {
+          	goal_id: dataOrganizations.id,
+          	representative_id : $that.goal.representative_id.id
+          }
+          alert( JSON.stringify( rep_goal) )
+	        var argsRepGoal = {
+					    data: rep_goal,
+					    headers: { "Content-Type": "application/json" }
+					};
+					client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives', 'POST')
+          client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
+          	//alert( JSON.stringify(dataGoalRep) );
+          })
+          $that.get_goals()    
+				}
+                    
+        console.log(dataOrganizations);
+      
         })
 
       },
@@ -253,7 +263,14 @@
             $that.get_goals();
           }, 10)
         })
+      },
+      show_update_goal_form: function(goal) {                
+        this.goal_id = goal;        
+        alert( JSON.stringify(goal) );
+        $('#editGoalsModal').modal('show')
+      
       }
+        
     },    
     created () {
       this.get_contact_option()
@@ -271,5 +288,11 @@
 }
 .modal-lg {
     width: 65% !important;
+}
+#goalsModal{
+	z-index: 90;
+}
+#editGoalsModal{
+	z-index: 91;
 }
 </style>
