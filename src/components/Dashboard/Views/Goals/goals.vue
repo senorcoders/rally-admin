@@ -183,7 +183,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
-         alert(post_data.contact_option_id);
+         //alert(post_data.contact_option_id);
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goals', 'POST')
         client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
@@ -194,7 +194,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
           	goal_id: dataOrganizations.id,
           	representative_id : $that.goal.representative_id.id
           }
-          alert( JSON.stringify( rep_goal) )
+          //alert( JSON.stringify( rep_goal) )
 	        var argsRepGoal = {
 					    data: rep_goal,
 					    headers: { "Content-Type": "application/json" }
@@ -266,7 +266,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
       },
       show_update_goal_form: function(goal) {                
         this.goal_id = goal;        
-        alert( JSON.stringify(goal) );
+        //alert( JSON.stringify(goal) );
         $('#editGoalsModal').modal('show')
       
       }

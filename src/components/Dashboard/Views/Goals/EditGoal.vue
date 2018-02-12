@@ -246,4 +246,7 @@
 .image-tag{
   margin-bottom: 15px !important;
 }
+#editGoalsModal .modal-lg {
+    width: 80% !important;
+}
 </style>
