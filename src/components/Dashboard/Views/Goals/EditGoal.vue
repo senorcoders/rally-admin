@@ -37,7 +37,7 @@
 						          <div class="col-md-5">
 						            <div class="form-group">
 						            	<label>Contact Option </label>
-						              <v-select id="contact" v-model="goal_id.backend_contact_option" :options="contact_options" label="title">
+						              <v-select id="contact" v-model="goal_id.backend_contact_option[0]" :options="contact_options" label="title">
 												    <template slot="option" slot-scope="option">												        
 												        {{ option.title }}
 												    </template>
@@ -53,11 +53,11 @@
 					                      v-model="goal_id.source_link">
 					            	</fg-input>
 					          	</div>
-					          	<div class="col-md-6" v-if="goal.contact_option_id.id === '40c652e4-bf45-4680-8223-b0b0cf8a92ba'">
+					          	<div class="col-md-6" v-if="goal_id.backend_contact_option[0].id === '40c652e4-bf45-4680-8223-b0b0cf8a92ba'">
 
 						            <div class="form-group reps" >
 						             	<label>Reps</label>
-						              <v-select v-model="goal_id.representative_id" :options="reps" label="name">
+						              <v-select v-model="goal_id.reps_goals[0]" :options="reps" label="name">
 												    <template slot="option" slot-scope="option">												        
 												        {{ option.name}}
 												    </template>
@@ -180,6 +180,20 @@
           }, 10)
         })
       },
+      get_reps_option: function () {
+        var Client = require('node-rest-client').Client
+        var client = new Client()
+        var $that = this
+        // registering remote methods
+        //client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/reps', 'GET')
+        client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/rallyapi/backend/reps', 'GET')        
+        client.methods.jsonMethod(function (dataReps, response) {
+          // parsed response body as js object
+          setTimeout(function () {
+            $that.reps = dataReps
+          }, 10)
+        })
+      },
       get_organizations: function () {
         var Client = require('node-rest-client').Client
         var client = new Client()
@@ -214,6 +228,8 @@
   created () {      
       this.get_organizations();
       this.get_contact_option();
+            this.get_reps_option();
+
     },
     beforeMount () {
       //alert('mount');
