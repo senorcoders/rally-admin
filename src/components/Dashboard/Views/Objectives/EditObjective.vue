@@ -126,7 +126,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
             action_link:''
           }   
         }
-        alert(JSON.stringify(image));      
+        //alert(JSON.stringify(image));      
         var args = {
 				    data: post_data,
 				    headers: { "Content-Type": "application/json" }
@@ -136,10 +136,10 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
-        alert( JSON.stringify(args));
+        //alert( JSON.stringify(args));
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives/'+$that.objective_id.id, 'PUT')
         client.methods.jsonMethod(args, function (dataObjective, response) {
-          alert( JSON.stringify(dataObjective));
+          //alert( JSON.stringify(dataObjective));
           // parsed response body as js object
           setTimeout(function () {                   
             $('#edit-objective-modal-lg').modal('hide')

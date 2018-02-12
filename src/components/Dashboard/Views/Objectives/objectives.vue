@@ -61,7 +61,7 @@
                       <td>{{ item.description.substr(0, 40) }}</td> 
                       <td>{{ item.organization.name }}</td> 
                       <!--<td>{{ item.organization.action_link }}</td> -->
-                      <td>{{ item.release_date }}</td>              
+                      <td>{{ item.release_date | truncate '4' }}</td>              
                       <td> 
                         <button v-on:click="get_goals(item.id)">
                           <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
@@ -130,6 +130,12 @@
         }
       }
     },
+    filters: {
+  
+      truncate: function(string, value) {
+        return string.substring(0, value) + '...';
+      }
+    },
     methods: {
       get_goals: function(id){
       $('#goalsModal').modal('show');
@@ -193,6 +199,7 @@
     beforeMount () {
       this.get_objectives()
     }
+    
   }
 </script>
 <style>
