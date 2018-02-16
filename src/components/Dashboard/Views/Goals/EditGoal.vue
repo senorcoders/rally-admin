@@ -133,7 +133,7 @@
         	
         var args = {
 				    data: post_data,
-				    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
 				};
 
         var Client = require('node-rest-client').Client
@@ -145,19 +145,21 @@
           // parsed response body as js object
           setTimeout(function () {            
             
-						if($that.goal_id.contact_option_id == '40c652e4-bf45-4680-8223-b0b0cf8a92ba'){
+						if($that.goal_id.backend_contact_option[0].id == '40c652e4-bf45-4680-8223-b0b0cf8a92ba'){
 							var rep_goal = {
 	            	goal_id: dataOrganizations.id,
-	            	representative_id : $that.goal.representative_id.id
+	            	representative_id : $that.goal_id.reps_goals[0].id
 	            }
-	            
+	          	
 			        var argsRepGoal = {
 							    data: rep_goal,
 							    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
 							};
-							client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives', 'POST')
+							//alert( JSON.stringify( $that.goal_id.goal_rep_id[0].id ) );  
+							//alert( JSON.stringify( rep_goal ) );  
+							client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives/'+$that.goal_id.goal_rep_id[0].id, 'PUT')
 	            client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
-	            	
+	          		$that.$emit('get_goals')          	
 	            })
 						}
             $('#editGoalsModal').modal('hide')
@@ -237,6 +239,7 @@
     
   },
   created () {      
+  	this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
       this.get_organizations();
       this.get_contact_option();
             this.get_reps_option();
