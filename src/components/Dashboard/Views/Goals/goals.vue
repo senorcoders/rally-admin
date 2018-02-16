@@ -241,7 +241,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goal_types', 'GET')
         client.methods.jsonMethod(args ,function (dataContactOptions, response) {
           // parsed response body as js object
-          alert( JSON.stringify(dataContactOptions) )
+          //alert( JSON.stringify(dataContactOptions) )
           setTimeout(function () {
             $that.contact_options = dataContactOptions
             $that.goal_id.backend_contact_option=dataContactOptions
@@ -290,6 +290,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         
     },    
     created () {
+    	this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
       this.get_contact_option()
       this.get_reps_option();
     },

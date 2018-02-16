@@ -18,8 +18,7 @@
               <div class="form-group">
                 <label>Organizations</label>
                 <v-select v-model="objective_id.organization" :options="organizations"  label="name">
-                  <template slot="option" slot-scope="option">
-                      <img style="width=20px" class="fa" :src="option.image_url"></img>
+                  <template slot="option" slot-scope="option">                      
                       {{ option.name }}
                   </template>
                 </v-select>
@@ -187,6 +186,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
     
   },
   created () {      
+    this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
       this.get_organizations();
     },
     beforeMount () {

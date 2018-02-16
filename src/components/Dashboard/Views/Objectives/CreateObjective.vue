@@ -19,7 +19,7 @@
 	              <label>Organizations</label>
 	              <v-select v-model="objective.organizations" :options="organizations" label="name">
 							    <template slot="option" slot-scope="option">
-							        <img style="width=20px" class="fa" :src="option.image_url"></img>
+							        <!--<img style="width=20px" class="fa" :src="option.image_url"></img>-->
 							        {{ option.name }}
 							    </template>
 							  </v-select>
@@ -144,19 +144,21 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var args = {            
             headers: { "Content-Type": "application/json","Authorization": $that.$root.token }
         };
+
         // registering remote methods
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/backend/organizations', 'GET')
         client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
           //alert( JSON.stringify(dataOrganizations) )
           setTimeout(function () {
-            alert( JSON.stringify(dataOrganizations) );
+            //alert( JSON.stringify(dataOrganizations) );
             $that.organizations = dataOrganizations
           }, 100)
         })
       }
     },
     created () {
+      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
       this.get_organizations()
     },
     beforeMount () {
