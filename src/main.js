@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import vClickOutside from 'v-click-outside'
 
+
+
 // Plugins
 import GlobalComponents from './gloablComponents'
 import Notifications from './components/UIComponents/NotificationPlugin'
@@ -37,6 +39,14 @@ Object.defineProperty(Vue.prototype, '$Chartist', {
     return this.$root.Chartist
   }
 })
+// global library setup
+
+// global library setup
+Object.defineProperty(Vue.prototype, '$token', {
+  get () {
+    return this.$root.token
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
@@ -44,6 +54,7 @@ new Vue({
   render: h => h(App),
   router,
   data: {
-    Chartist: Chartist
+    Chartist: Chartist,
+    token: ''
   }
 })

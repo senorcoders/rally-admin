@@ -112,11 +112,9 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
           image_url: image,
           action_link:''
       	}        
-        //alert(this.$refs.my_upload);
-
         var args = {
 				    data: post_data,
-				    headers: { "Content-Type": "application/json" }
+				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
 				};
 
         
@@ -143,11 +141,16 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
+        var args = {            
+            headers: { "Content-Type": "application/json","Authorization": $that.$root.token }
+        };
         // registering remote methods
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/backend/organizations', 'GET')
-        client.methods.jsonMethod(function (dataOrganizations, response) {
+        client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
+          //alert( JSON.stringify(dataOrganizations) )
           setTimeout(function () {
+            alert( JSON.stringify(dataOrganizations) );
             $that.organizations = dataOrganizations
           }, 100)
         })

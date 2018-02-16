@@ -92,6 +92,7 @@
   import CreateObjective from 'components/Dashboard/Views/Objectives/CreateObjective.vue'
   import EditObjective from 'components/Dashboard/Views/Objectives/EditObjective.vue'
   import CreateGoal from 'components/Dashboard/Views/Goals/goals.vue'
+  
   const tableColumns = [
     'Id',
     'Image',
@@ -145,10 +146,12 @@
       var client = new Client();
       var $that = this;  
       this.objective_id = id;
-      // registering remote methods 
+      var args = {
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
       client.registerMethod("jsonMethod", "http://api.provethisconcept.com/api/goals?objective_id="+id, "GET");
        
-      client.methods.jsonMethod(function (dataGoal, response) {
+      client.methods.jsonMethod( args, function (dataGoal, response) {
           // parsed response body as js object          
           setTimeout(function () {
               $that.goals_data = dataGoal;
@@ -156,15 +159,18 @@
             }, 100);
           
       });
-      //alert(id);
     },
-      get_objectives: function () {
+      get_objectives: function () {        
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
+        var args = {
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
+        //alert( JSON.stringify(args) )
         // registering remote methods
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives', 'GET')
-        client.methods.jsonMethod(function (dataR, response) {
+        client.methods.jsonMethod(args, function (dataR, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.table1.data = dataR
@@ -176,8 +182,11 @@
         var client = new Client()
         var $that = this
         // registering remote methods
+        var args = {
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
         client.registerMethod('jsonDeletMethod', 'https://api.provethisconcept.com/api/objectives/'+id, 'DELETE')
-        client.methods.jsonDeletMethod(function (dataR, response) {
+        client.methods.jsonDeletMethod(args, function (dataR, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.get_objectives();
@@ -189,15 +198,51 @@
         
         $('#edit-objective-modal-lg').modal('show')
       
+      },
+      request_token: function(){
+        //const Auth = require('./../../../../auth/authenticate.js');
+        //Auth.requestRallyToken
+      },
+      requestRallyToken: function() {
+          let post_data= {
+                "email": "admin@senorcoders.com",
+                "password": "helium33"
+              }
+                
+              var args = {
+                  data: post_data,
+                  headers: { "Content-Type": "application/json" }
+              };
+
+              var Client = require('node-rest-client').Client
+              var client = new Client()
+              var $that = this
+
+              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.methods.jsonMethod(args, function (authData, response) {
+                // parsed response body as js object
+                //$that.token = dataOrganizations.auth_token
+                //alert(dataOrganizations.auth_token);
+                //$that.token = auth_token;
+                $that.$root.token = authData.auth_token
+                //alert($that.$root.token)
+                $that.get_objectives()                
+              })
       }
         
       
     },
+    
     created () {
       //this.get_objectives()
+      //alert("sad");
+      this.requestRallyToken();
+      
+      
     },
     beforeMount () {
-      this.get_objectives()
+      //this.get_objectives()
+      
     }
     
   }

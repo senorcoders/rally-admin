@@ -9,7 +9,7 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<i class="fa fa-remove" aria-hidden="true"></i>
 	        </button>
-	        <h4 class="modal-title" id="gridSystemModalLabel">Goals {{objective_id}}</h4>
+	        <h4 class="modal-title" id="gridSystemModalLabel">Goals </h4>
 	      </div>
 	      <div class="modal-body">
 					
@@ -177,7 +177,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         	
         var args = {
 				    data: post_data,
-				    headers: { "Content-Type": "application/json" }
+				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
 				};
 
         var Client = require('node-rest-client').Client
@@ -194,10 +194,11 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
           	goal_id: dataOrganizations.id,
           	representative_id : $that.goal.representative_id.id
           }
+          
           //alert( JSON.stringify( rep_goal) )
 	        var argsRepGoal = {
 					    data: rep_goal,
-					    headers: { "Content-Type": "application/json" }
+					    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token  }
 					};
 					client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives', 'POST')
           client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
@@ -215,9 +216,13 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
+
+        var args = {
+				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
+				};
         // registering remote methods
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goals?objective_id='+$that.objective_id, 'GET')
-        client.methods.jsonMethod(function (dataGoals, response) {
+        client.methods.jsonMethod(args ,function (dataGoals, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.goals_data = dataGoals;
@@ -228,12 +233,18 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
+
+        var args = {
+				    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+				};
         // registering remote methods
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goal_types', 'GET')
-        client.methods.jsonMethod(function (dataContactOptions, response) {
+        client.methods.jsonMethod(args ,function (dataContactOptions, response) {
           // parsed response body as js object
+          alert( JSON.stringify(dataContactOptions) )
           setTimeout(function () {
             $that.contact_options = dataContactOptions
+            $that.goal_id.backend_contact_option=dataContactOptions
           }, 10)
         })
       },
@@ -241,10 +252,13 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
+        var args = {
+				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
+				};
         // registering remote methods
         //client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/reps', 'GET')
         client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/rallyapi/backend/reps', 'GET')        
-        client.methods.jsonMethod(function (dataReps, response) {
+        client.methods.jsonMethod(args, function (dataReps, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.reps = dataReps
@@ -255,9 +269,12 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
+        var args = {
+				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
+				};
         // registering remote methods
         client.registerMethod('jsonDeletMethod', 'https://api.provethisconcept.com/api/goals/'+id, 'DELETE')
-        client.methods.jsonDeletMethod(function (dataR, response) {
+        client.methods.jsonDeletMethod(args, function (dataR, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.get_goals();

@@ -133,7 +133,7 @@
         	
         var args = {
 				    data: post_data,
-				    headers: { "Content-Type": "application/json" }
+				    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
 				};
 
         var Client = require('node-rest-client').Client
@@ -153,7 +153,7 @@
 	            
 			        var argsRepGoal = {
 							    data: rep_goal,
-							    headers: { "Content-Type": "application/json" }
+							    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
 							};
 							client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives', 'POST')
 	            client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
@@ -172,8 +172,11 @@
         var client = new Client()
         var $that = this
         // registering remote methods
+        var args = {            
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goal_types', 'GET')
-        client.methods.jsonMethod(function (dataContactOptions, response) {
+        client.methods.jsonMethod(args, function (dataContactOptions, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.contact_options = dataContactOptions
@@ -185,9 +188,11 @@
         var client = new Client()
         var $that = this
         // registering remote methods
-        //client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/reps', 'GET')
+        var args = {            
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
         client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/rallyapi/backend/reps', 'GET')        
-        client.methods.jsonMethod(function (dataReps, response) {
+        client.methods.jsonMethod(args, function (dataReps, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.reps = dataReps
@@ -198,9 +203,12 @@
         var Client = require('node-rest-client').Client
         var client = new Client()
         var $that = this
+        var args = {            
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
         // registering remote methods
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/backend/organizations', 'GET')
-        client.methods.jsonMethod(function (dataOrganizations, response) {
+        client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.organizations = dataOrganizations
@@ -214,7 +222,10 @@
         // registering remote methods
         //alert($that.objective_id);
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/api/objectives/'+$that.objective_id, 'GET')
-        client.methods.jsonMethod(function (dataOrganizations, response) {
+        var args = {            
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
+        client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
             //$that.organizations = dataOrganizations

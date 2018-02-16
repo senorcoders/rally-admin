@@ -129,7 +129,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         //alert(JSON.stringify(image));      
         var args = {
 				    data: post_data,
-				    headers: { "Content-Type": "application/json" }
+				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
 				};
 
         
@@ -137,6 +137,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var client = new Client()
         var $that = this
         //alert( JSON.stringify(args));
+
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives/'+$that.objective_id.id, 'PUT')
         client.methods.jsonMethod(args, function (dataObjective, response) {
           //alert( JSON.stringify(dataObjective));
@@ -153,8 +154,11 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var client = new Client()
         var $that = this
         // registering remote methods
+        var args = {            
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/backend/organizations', 'GET')
-        client.methods.jsonMethod(function (dataOrganizations, response) {
+        client.methods.jsonMethod(args ,function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
             $that.organizations = dataOrganizations
@@ -167,8 +171,11 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var $that = this
         // registering remote methods
         //alert($that.objective_id);
+        var args = {            
+            headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
+        };
         client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/api/objectives/'+$that.objective_id, 'GET')
-        client.methods.jsonMethod(function (dataOrganizations, response) {
+        client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
             //$that.organizations = dataOrganizations
