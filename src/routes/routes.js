@@ -12,6 +12,7 @@ import Typography from 'src/components/Dashboard/Views/Typography.vue'
 import TableList from 'src/components/Dashboard/Views/TableList.vue'
 import ObjectivesList from 'src/components/Dashboard/Views/Objectives/objectives.vue'
 import UserList from 'src/components/Dashboard/Views/Users/users.vue'
+
 const routes = [
   {
     path: '/',

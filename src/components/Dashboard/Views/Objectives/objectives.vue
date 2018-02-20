@@ -2,7 +2,17 @@
   <div>    
     <div class="row">
       <!-- Large modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".create-objective-modal-lg">Create Objective</button><br><br>
+      <!--<div class="modal fade urgentAction urgentAction-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+      
+            <UrgentAction></UrgentAction>
+          </div>
+        </div>
+      </div>-->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".create-objective-modal-lg">Create Objective</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".urgentAction-modal-lg">Send Urgent Action</button><br><br>
+
       <div class="modal fade create-objective-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -92,7 +102,8 @@
   import CreateObjective from 'components/Dashboard/Views/Objectives/CreateObjective.vue'
   import EditObjective from 'components/Dashboard/Views/Objectives/EditObjective.vue'
   import CreateGoal from 'components/Dashboard/Views/Goals/goals.vue'
-  
+  import UrgentAction from 'components/Dashboard/Views/UrgentAction/CreateUrgentAction.vue'
+
   const tableColumns = [
     'Id',
     'Image',
@@ -113,7 +124,8 @@
       PaperTable,
       CreateObjective,
       EditObjective,
-      CreateGoal
+      CreateGoal,
+      UrgentAction
     },
     data () {
       return {
