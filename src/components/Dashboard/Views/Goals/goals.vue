@@ -203,6 +203,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
 					client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives', 'POST')
           client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
           	//alert( JSON.stringify(dataGoalRep) );
+          	      $('#goalsModal').modal('hide');
           })
           $that.get_goals()    
 				}
@@ -290,7 +291,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         
     },    
     created () {
-    	this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
+    	//this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
       this.get_contact_option()
       this.get_reps_option();
     },
