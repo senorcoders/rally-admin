@@ -31,7 +31,7 @@
 					          	<div class="col-md-3">
 						            <div class="form-group">
 						              <label>Goal Type</label>
-						              <v-select v-model="goal.goal_type" :options="[{label: 'Call', value: 'call'},{label: 'Donate', value: 'donate'},{label: 'Email', value: 'email'},{label: 'Fax', value: 'fax'}]" label="label">							    
+						              <v-select v-model="goal.goal_type" :options="[{label: 'Call', value: 'call'},{label: 'Donate', value: 'donate'},{label: 'Sign', value: 'sign'}]" label="label">							    
 												  </v-select>
 						            </div>
 						          </div>

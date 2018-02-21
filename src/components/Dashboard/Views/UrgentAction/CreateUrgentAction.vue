@@ -54,6 +54,13 @@
         var client = new Client()
         var $that = this
 
+        //making the push notification to all the devices //push notifications server should be running
+       //https://noti.provethisconcept.com/notification/notify/:message(.:format) 
+        client.registerMethod("jsonMethod", "https://noti.provethisconcept.com/notification/notify/"+$that.ux_events.data, "GET");
+        client.methods.jsonMethod( function (dataNotification, responseNotifications) {
+        	console.log("notification sent");
+        })          
+
       	client.registerMethod("jsonMethod", "http://api.provethisconcept.com/rallyapi/user/all_devices", "GET");
         client.methods.jsonMethod(args, function (dataRally, responseRally) {          
           for (let item of dataRally){

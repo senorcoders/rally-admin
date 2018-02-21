@@ -71,7 +71,7 @@
                       <td>{{ item.description.substr(0, 40) }}</td> 
                       <td>{{ item.organization.name }}</td> 
                       <!--<td>{{ item.organization.action_link }}</td> -->
-                      <td>{{ item.release_date | truncate '4' }}</td>              
+                      <td>{{ item.release_date  }}</td>              
                       <td> 
                         <button v-on:click="get_goals(item.id)">
                           <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
@@ -248,7 +248,7 @@
     created () {
       //this.get_objectives()
       //alert("sad");
-      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
+      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5MzI4MDA0fQ.dVvjX0JjIaCcdCAqwGsA710BsLdx1EU5VQ6edgVh5Bw"
       //this.$root.token = ""
       this.requestRallyToken();
       
