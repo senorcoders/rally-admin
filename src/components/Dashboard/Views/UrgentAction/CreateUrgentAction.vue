@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="header action">
-      <h4 class="title">Create Action</h4>
+      <h4 class="title">Send Urgent Call to Action </h4>
     </div>
     <div class="content">
       <form>
@@ -70,7 +70,7 @@
 						    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
 						};
 						//console.log(item)
-		        if(item.user_id == "b38da1d8-e300-4a49-90b0-aaa32662dcba"){
+//		        if(item.user_id == "b38da1d8-e300-4a49-90b0-aaa32662dcba"){
 			        post_data.user_id = item.user_id;
 			      	post_data.device_id = item.device_id;
 
@@ -81,7 +81,7 @@
 			            $('.urgentAction-modal-lg').modal('hide')            
 			          }, 10)
 			        })			      	
-		        }
+//		        }
 		      	
 		        
           }
