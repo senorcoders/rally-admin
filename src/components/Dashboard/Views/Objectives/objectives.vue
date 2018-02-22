@@ -71,7 +71,7 @@
                       <td>{{ item.description.substr(0, 40) }}</td> 
                       <td>{{ item.organization.name }}</td> 
                       <!--<td>{{ item.organization.action_link }}</td> -->
-                      <td>{{ item.release_date  }}</td>              
+                      <td>{{ item.release_date | formatDate }}</td>              
                       <td> 
                         <button v-on:click="get_goals(item.id)">
                           <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
@@ -103,6 +103,7 @@
   import EditObjective from 'components/Dashboard/Views/Objectives/EditObjective.vue'
   import CreateGoal from 'components/Dashboard/Views/Goals/goals.vue'
   import UrgentAction from 'components/Dashboard/Views/UrgentAction/CreateUrgentAction.vue'
+  import moment from 'moment'
 
   const tableColumns = [
     'Id',
@@ -147,6 +148,12 @@
   
       truncate: function(string, value) {
         return string.substring(0, value) + '...';
+      },
+
+      formatDate: function(release_date){
+        if (release_date) {
+          return moment(String(release_date)).format('YYYY-MM-DD HH:mm')
+        }
       }
     },
     methods: {
@@ -246,7 +253,7 @@
     },
     
     created () {
-      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5NDAzMDY5fQ.9O8guo-Bni-hZTzjfl4iBvlAkpee_5QJ0BwVuOxupGA"
+      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5NDI2MDk0fQ.EXKExHtFC22ga2F8gtGgu7JxxEHgf3-RjZUlssi5cO8"
       //this.$root.token = ""
       this.requestRallyToken();
       

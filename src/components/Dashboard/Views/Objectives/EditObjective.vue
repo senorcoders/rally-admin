@@ -27,7 +27,7 @@
 						<div class="col-md-12">
 	            <div class="form-group">
 	              <label>Release Date</label><br>
-	              <date-picker v-model="objective_id.release_date" format="yyyy-MM-dd" lang="en" ></date-picker>
+	              <date-picker v-model="objective_id.release_date" type="datetime" format="yyyy-MM-dd HH:mm" lang="en" ></date-picker>
 	            </div>
 	          </div>
             <div class="col-md-12">
