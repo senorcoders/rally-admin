@@ -246,9 +246,7 @@
     },
     
     created () {
-      //this.get_objectives()
-      //alert("sad");
-      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5MzI4MDA0fQ.dVvjX0JjIaCcdCAqwGsA710BsLdx1EU5VQ6edgVh5Bw"
+      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5NDAzMDY5fQ.9O8guo-Bni-hZTzjfl4iBvlAkpee_5QJ0BwVuOxupGA"
       //this.$root.token = ""
       this.requestRallyToken();
       

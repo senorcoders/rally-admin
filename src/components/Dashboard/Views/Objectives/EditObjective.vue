@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="header">
-      <h4 class="title">Update Objective {{objective_id.title}} </h4>
+      <h4 class="title">Update CTA (Objective) {{objective_id.title}} </h4>
     </div>
     <div class="content">
       <form>
@@ -41,7 +41,7 @@
           <div class="col-md-6">
           	<div class="col-md-12">
 							<div class="form-group">
-	              <label>Short Description</label>
+	              <label>Talking Points</label>
 	              <textarea rows="4" class="form-control border-input"
 	                        placeholder="Here can be your short description"
 	                        v-model="objective_id.short_desc">
@@ -51,7 +51,7 @@
 	          </div>
 	          <div class="col-md-12">
 	            <div class="form-group">
-	              <label>Description</label>
+	              <label>Why it's important (Description)</label>
 	              <textarea rows="4" class="form-control border-input"
 	                        placeholder="Here can be your description"
 	                        v-model="objective_id.description">
