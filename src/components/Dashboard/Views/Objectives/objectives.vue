@@ -188,7 +188,7 @@
         };
         //alert( JSON.stringify(args) )
         // registering remote methods
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives', 'GET')
+        client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/rallyapi/backend/objectives', 'GET')
         client.methods.jsonMethod(args, function (dataR, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -253,7 +253,7 @@
     },
     
     created () {
-      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5NDI2MDk0fQ.EXKExHtFC22ga2F8gtGgu7JxxEHgf3-RjZUlssi5cO8"
+      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5NDkwMjk4fQ.uE25ujnDgXxjiVdf9FKk-dotUzW5XhYYBqTyDMlmxbE"
       //this.$root.token = ""
       this.requestRallyToken();
       
