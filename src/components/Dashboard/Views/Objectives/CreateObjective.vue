@@ -79,7 +79,7 @@
 import DatePicker from 'vue2-datepicker'
 import FileUpload from 'vue-simple-upload/dist/FileUpload'
 import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
-
+import config from '../../../../config';
 //import uploader from 'vuejs-uploader'
   export default {
   	components: { DatePicker, 'fileupload': FileUpload, CustomImageUpload },
@@ -123,7 +123,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var $that = this
         //alert( JSON.stringify(args) ); 
 
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives', 'POST')
+        client.registerMethod('jsonMethod', config.baseURL +'/api/objectives', 'POST')
         client.methods.jsonMethod(args, function (dataObjective, response) {
           // parsed response body as js object        
           setTimeout(function () {            
@@ -146,7 +146,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         };
 
         // registering remote methods
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/backend/organizations', 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/rallyapi/backend/organizations', 'GET')
         client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
           //alert( JSON.stringify(dataOrganizations) )
@@ -171,7 +171,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
               var client = new Client()
               var $that = this
 
-              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.registerMethod('jsonMethod', config.baseURL +'/authenticate', 'POST')
               client.methods.jsonMethod(args, function (authData, response) {
                 // parsed response body as js object
                 //$that.token = dataOrganizations.auth_token

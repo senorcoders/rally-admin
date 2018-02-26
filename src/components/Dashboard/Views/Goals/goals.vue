@@ -134,6 +134,7 @@
 </template>
 <script>
 import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
+import config from '../../../../config';
 
   export default {
   	name: 'CreateGoal',
@@ -184,7 +185,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
         var client = new Client()
         var $that = this
          //alert(post_data.contact_option_id);
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goals', 'POST')
+        client.registerMethod('jsonMethod', config.baseURL +'/api/goals', 'POST')
         client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
                                 
@@ -200,7 +201,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
 					    data: rep_goal,
 					    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token  }
 					};
-					client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives', 'POST')
+					client.registerMethod('saveGoalRep', config.baseURL +'/api/goal_representatives', 'POST')
           client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
           	//alert( JSON.stringify(dataGoalRep) );
           	      $('#goalsModal').modal('hide');
@@ -222,7 +223,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
 				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
 				};
         // registering remote methods
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goals?objective_id='+$that.objective_id, 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/api/goals?objective_id='+$that.objective_id, 'GET')
         client.methods.jsonMethod(args ,function (dataGoals, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -239,7 +240,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
 				    headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
 				};
         // registering remote methods
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goal_types', 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/api/goal_types', 'GET')
         client.methods.jsonMethod(args ,function (dataContactOptions, response) {
           // parsed response body as js object
           //alert( JSON.stringify(dataContactOptions) )
@@ -258,7 +259,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
 				};
         // registering remote methods
         //client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/reps', 'GET')
-        client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/rallyapi/backend/reps', 'GET')        
+        client.registerMethod('jsonMethod', config.baseURL +'/rallyapi/backend/reps', 'GET')        
         client.methods.jsonMethod(args, function (dataReps, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -274,7 +275,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
 				    headers: { "Content-Type": "application/json", "Authorization": this.$root.token }
 				};
         // registering remote methods
-        client.registerMethod('jsonDeletMethod', 'https://api.provethisconcept.com/api/goals/'+id, 'DELETE')
+        client.registerMethod('jsonDeletMethod', config.baseURL +'/api/goals/'+id, 'DELETE')
         client.methods.jsonDeletMethod(args, function (dataR, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -303,7 +304,7 @@ import EditGoal from 'components/Dashboard/Views/Goals/EditGoal.vue'
               var client = new Client()
               var $that = this
 
-              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.registerMethod('jsonMethod', config.baseURL +'/authenticate', 'POST')
               client.methods.jsonMethod(args, function (authData, response) {
                 // parsed response body as js object
                 //$that.token = dataOrganizations.auth_token

@@ -95,6 +95,7 @@
 </template>
 <script>	
 //import uploader from 'vuejs-uploader'
+import config from '../../../../config';
   export default {  	
   	name: 'EditGoal',
     props: ["goal_id"],
@@ -140,7 +141,7 @@
         var client = new Client()
         var $that = this
         
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goals/'+$that.goal_id.id, 'PUT')
+        client.registerMethod('jsonMethod', config.baseURL +'/api/goals/'+$that.goal_id.id, 'PUT')
         client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {            
@@ -157,7 +158,7 @@
 							};
 							//alert( JSON.stringify( $that.goal_id.goal_rep_id[0].id ) );  
 							//alert( JSON.stringify( rep_goal ) );  
-							client.registerMethod('saveGoalRep', 'https://api.provethisconcept.com/api/goal_representatives/'+$that.goal_id.goal_rep_id[0].id, 'PUT')
+							client.registerMethod('saveGoalRep', config.baseURL +'/api/goal_representatives/'+$that.goal_id.goal_rep_id[0].id, 'PUT')
 	            client.methods.saveGoalRep(argsRepGoal, function (dataGoalRep, responseGoalRep) {
 	          		$that.$emit('get_goals')          	
 	            })
@@ -177,7 +178,7 @@
         var args = {            
             headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
         };
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/goal_types', 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/api/goal_types', 'GET')
         client.methods.jsonMethod(args, function (dataContactOptions, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -193,7 +194,7 @@
         var args = {            
             headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
         };
-        client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/rallyapi/backend/reps', 'GET')        
+        client.registerMethod('jsonMethod', config.baseURL +'/rallyapi/backend/reps', 'GET')        
         client.methods.jsonMethod(args, function (dataReps, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -209,7 +210,7 @@
             headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
         };
         // registering remote methods
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/backend/organizations', 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/rallyapi/backend/organizations', 'GET')
         client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -223,7 +224,7 @@
         var $that = this
         // registering remote methods
         //alert($that.objective_id);
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/api/objectives/'+$that.objective_id, 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/rallyapi/api/objectives/'+$that.objective_id, 'GET')
         var args = {            
             headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
         };
@@ -251,7 +252,7 @@
               var client = new Client()
               var $that = this
 
-              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.registerMethod('jsonMethod', config.baseURL +'/authenticate', 'POST')
               client.methods.jsonMethod(args, function (authData, response) {
                 // parsed response body as js object
                 //$that.token = dataOrganizations.auth_token

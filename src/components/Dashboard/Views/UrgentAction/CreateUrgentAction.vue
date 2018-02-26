@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+import config from '../../../../config';
   export default {
     data () {
       return {
@@ -56,12 +57,12 @@
 
         //making the push notification to all the devices //push notifications server should be running
        //https://noti.provethisconcept.com/notification/notify/:message(.:format) 
-        client.registerMethod("jsonMethod", "https://noti.provethisconcept.com/notification/notify/"+$that.ux_events.data, "GET");
+        client.registerMethod("jsonMethod", config.baseURL +"/notification/notify/"+$that.ux_events.data, "GET");
         client.methods.jsonMethod( function (dataNotification, responseNotifications) {
         	console.log("notification sent");
         })          
 
-      	client.registerMethod("jsonMethod", "http://api.provethisconcept.com/rallyapi/user/all_devices", "GET");
+      	client.registerMethod("jsonMethod", config.baseURL +"/rallyapi/user/all_devices", "GET");
         client.methods.jsonMethod(args, function (dataRally, responseRally) {          
           for (let item of dataRally){
           	let post_data= $that.ux_events   
@@ -74,7 +75,7 @@
 			        post_data.user_id = item.user_id;
 			      	post_data.device_id = item.device_id;
 
-			      	client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/ux_events', 'POST')
+			      	client.registerMethod('jsonMethod', config.baseURL +'/api/ux_events', 'POST')
 			        client.methods.jsonMethod(args, function (dataObjective, response) {
 			          // parsed response body as js object        
 			          setTimeout(function () {

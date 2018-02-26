@@ -48,6 +48,7 @@ Object.defineProperty(Vue.prototype, '$token', {
   }
 })
 
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

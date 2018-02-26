@@ -78,7 +78,7 @@
 import DatePicker from 'vue2-datepicker'
 import FileUpload from 'vue-simple-upload/dist/FileUpload'
 import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
-
+import config from '../../../../config';
 //import uploader from 'vuejs-uploader'
   export default {
   	components: { DatePicker, 'fileupload': FileUpload, CustomImageUpload },
@@ -137,7 +137,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var $that = this
         //alert( JSON.stringify(args));
 
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/api/objectives/'+$that.objective_id.id, 'PUT')
+        client.registerMethod('jsonMethod', config.baseURL +'/api/objectives/'+$that.objective_id.id, 'PUT')
         client.methods.jsonMethod(args, function (dataObjective, response) {
           //alert( JSON.stringify(dataObjective));
           // parsed response body as js object
@@ -156,7 +156,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var args = {            
             headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
         };
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/backend/organizations', 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/rallyapi/backend/organizations', 'GET')
         client.methods.jsonMethod(args ,function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -173,7 +173,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
         var args = {            
             headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
         };
-        client.registerMethod('jsonMethod', 'https://api.provethisconcept.com/rallyapi/api/objectives/'+$that.objective_id, 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/rallyapi/api/objectives/'+$that.objective_id, 'GET')
         client.methods.jsonMethod(args, function (dataOrganizations, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -198,7 +198,7 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
               var client = new Client()
               var $that = this
 
-              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.registerMethod('jsonMethod', config.baseURL +'/authenticate', 'POST')
               client.methods.jsonMethod(args, function (authData, response) {                
                 $that.$root.token = authData.auth_token
                 //alert($that.$root.token)
@@ -210,11 +210,6 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
   created () {      
     
       this.requestRallyToken();
-    },
-    beforeMount () {
-      //alert('mount');
-      //this.get_organizations()
-      //get_one_objective();
     }
 }
 

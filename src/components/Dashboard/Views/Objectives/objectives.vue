@@ -104,6 +104,7 @@
   import CreateGoal from 'components/Dashboard/Views/Goals/goals.vue'
   import UrgentAction from 'components/Dashboard/Views/UrgentAction/CreateUrgentAction.vue'
   import moment from 'moment'
+  import config from '../../../../config';
 
   const tableColumns = [
     'Id',
@@ -168,7 +169,7 @@
       var args = {
             headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
         };
-      client.registerMethod("jsonMethod", "http://api.provethisconcept.com/api/goals?objective_id="+id, "GET");
+      client.registerMethod("jsonMethod", config.baseURL +"/api/goals?objective_id="+id, "GET");
        
       client.methods.jsonMethod( args, function (dataGoal, response) {
           // parsed response body as js object          
@@ -188,7 +189,7 @@
         };
         //alert( JSON.stringify(args) )
         // registering remote methods
-        client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/rallyapi/backend/objectives', 'GET')
+        client.registerMethod('jsonMethod', config.baseURL +'/rallyapi/backend/objectives', 'GET')
         client.methods.jsonMethod(args, function (dataR, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -204,7 +205,7 @@
         var args = {
             headers: { "Content-Type": "application/json", "Authorization": $that.$root.token }
         };
-        client.registerMethod('jsonDeletMethod', 'https://api.provethisconcept.com/api/objectives/'+id, 'DELETE')
+        client.registerMethod('jsonDeletMethod', config.baseURL +'/api/objectives/'+id, 'DELETE')
         client.methods.jsonDeletMethod(args, function (dataR, response) {
           // parsed response body as js object
           setTimeout(function () {
@@ -237,7 +238,7 @@
               var client = new Client()
               var $that = this
 
-              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.registerMethod('jsonMethod', config.baseURL +'/authenticate', 'POST')
               client.methods.jsonMethod(args, function (authData, response) {
                 // parsed response body as js object
                 //$that.token = dataOrganizations.auth_token
