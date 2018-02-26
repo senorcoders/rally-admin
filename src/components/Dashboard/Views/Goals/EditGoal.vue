@@ -235,15 +235,39 @@
           }, 100)
         })
       
-    }
+    },
+    requestRallyToken: function() {
+          let post_data= {
+                "email": "admin@senorcoders.com",
+                "password": "helium33"
+              }
+                
+              var args = {
+                  data: post_data,
+                  headers: { "Content-Type": "application/json" }
+              };
+
+              var Client = require('node-rest-client').Client
+              var client = new Client()
+              var $that = this
+
+              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.methods.jsonMethod(args, function (authData, response) {
+                // parsed response body as js object
+                //$that.token = dataOrganizations.auth_token
+                //alert(dataOrganizations.auth_token);
+                //$that.token = auth_token;
+                $that.$root.token = authData.auth_token
+                //alert($that.$root.token)
+                $that.get_organizations()   
+                $that.get_contact_option()
+                $that.get_reps_option()          
+              })
+      }
     
   },
   created () {      
-  	//this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
-      this.get_organizations();
-      this.get_contact_option();
-            this.get_reps_option();
-
+      this.requestRallyToken();
     },
     beforeMount () {
       //alert('mount');

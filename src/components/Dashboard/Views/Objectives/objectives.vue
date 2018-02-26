@@ -253,11 +253,7 @@
     },
     
     created () {
-      this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5NDkwMjk4fQ.uE25ujnDgXxjiVdf9FKk-dotUzW5XhYYBqTyDMlmxbE"
-      //this.$root.token = ""
-      this.requestRallyToken();
-      
-      
+      this.requestRallyToken();        
     },
     beforeMount () {
       //this.get_objectives()

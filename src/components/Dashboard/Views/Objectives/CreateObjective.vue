@@ -155,12 +155,36 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
             $that.organizations = dataOrganizations
           }, 100)
         })
+      },
+      requestRallyToken: function() {
+          let post_data= {
+                "email": "admin@senorcoders.com",
+                "password": "helium33"
+              }
+                
+              var args = {
+                  data: post_data,
+                  headers: { "Content-Type": "application/json" }
+              };
+
+              var Client = require('node-rest-client').Client
+              var client = new Client()
+              var $that = this
+
+              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.methods.jsonMethod(args, function (authData, response) {
+                // parsed response body as js object
+                //$that.token = dataOrganizations.auth_token
+                //alert(dataOrganizations.auth_token);
+                //$that.token = auth_token;
+                $that.$root.token = authData.auth_token
+                //alert($that.$root.token)
+                $that.get_organizations()             
+              })
       }
     },
     created () {
-      //this.$root.token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE4OTA2NjAzfQ.0jBeewVV4H4Ex-m3ZHhv9-RHeg-n5TpEokGP0qY-WC8"
-      //this.$root.token="eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiZWFmZWNlYzctOGQyMi00MjNkLTg4YTgtNzVkZjk3YzRhMzA0IiwiZXhwIjoxNTE5MjI4Nzc5fQ.lms_IW1vISQeFVYtMbPCT8xcg0Sbcy8hKh8aojqbX4g"
-      this.get_organizations()
+      this.requestRallyToken()
     },
     beforeMount () {
       //this.get_organizations()

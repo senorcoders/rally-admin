@@ -182,12 +182,34 @@ import CustomImageUpload from 'components/Dashboard/Views/ImageUpload.vue'
           }, 100)
         })
       
-    }
+    },
+    requestRallyToken: function() {
+          let post_data= {
+                "email": "admin@senorcoders.com",
+                "password": "helium33"
+              }
+                
+              var args = {
+                  data: post_data,
+                  headers: { "Content-Type": "application/json" }
+              };
+
+              var Client = require('node-rest-client').Client
+              var client = new Client()
+              var $that = this
+
+              client.registerMethod('jsonMethod', 'http://api.provethisconcept.com/authenticate', 'POST')
+              client.methods.jsonMethod(args, function (authData, response) {                
+                $that.$root.token = authData.auth_token
+                //alert($that.$root.token)
+                $that.get_organizations()             
+              })
+      }
     
   },
   created () {      
     
-      this.get_organizations();
+      this.requestRallyToken();
     },
     beforeMount () {
       //alert('mount');
