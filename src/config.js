@@ -1,3 +1,3 @@
 export default {
-  baseURL: 'http://api.provethisconcept.com'
+  baseURL: 'http://api.letsrally.us'
 }
